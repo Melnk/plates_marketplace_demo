@@ -1,0 +1,33 @@
+# Создаем .gitignore который игнорирует ВСЕ кроме текущей директории
+cat > .gitignore << 'EOF'
+# Игнорировать ВСЕ что вне этой директории
+../*
+
+# Игнорировать служебные файлы
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Игнорировать логи
+*.log
+
+# Игнорировать IDEA
+.idea/
+*.iml
+*.iws
+
+# Игнорировать target
+target/
+build/
+
+# Игнорировать OS files
+.DS_Store
+Thumbs.db
+
+# Игнорировать другие проекты
+!/plates-marketplace-demo/
+EOF
