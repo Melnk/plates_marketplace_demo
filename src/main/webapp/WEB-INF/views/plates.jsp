@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -168,7 +169,9 @@
                 <div class="card-body">
                     <div class="row text-center">
                         <div class="col-md-4">
-                            <h3 class="text-gold mb-1">${plates.size()}</h3>
+                            <h3 class="text-gold mb-1">
+                                <c:out value="${plates.size()}" />
+                            </h3>
                             <p class="text-muted mb-0">Всего номеров</p>
                         </div>
                         <div class="col-md-4">
@@ -179,19 +182,20 @@
                                         <c:set var="publishedCount" value="${publishedCount + 1}" />
                                     </c:if>
                                 </c:forEach>
-                                ${publishedCount}
+                                <c:out value="${publishedCount}" />
                             </h3>
                             <p class="text-muted mb-0">Опубликовано</p>
                         </div>
                         <div class="col-md-4">
                             <h3 class="text-primary mb-1">
-                                <c:set var="uniqueRegions" value="" />
+                                <c:set var="regionsSet" value="" />
                                 <c:forEach var="p" items="${plates}">
-                                    <c:if test="${!uniqueRegions.contains(p.region)}">
-                                        <c:set var="uniqueRegions" value="${uniqueRegions}${p.region}," />
+                                    <c:if test="${!fn:contains(regionsSet, p.region)}">
+                                        <c:set var="regionsSet" value="${regionsSet}${p.region}," />
                                     </c:if>
                                 </c:forEach>
-                                ${uniqueRegions.split(',').length - 1}
+                                <c:set var="regionsArray" value="${fn:split(regionsSet, ',')}" />
+                                <c:out value="${fn:length(regionsArray) - 1}" />
                             </h3>
                             <p class="text-muted mb-0">Регионов</p>
                         </div>
@@ -208,8 +212,12 @@
                 <div class="number-card p-4 h-100 d-flex flex-column">
                     <!-- Number Plate -->
                     <div class="number-plate mb-4">
-                        <div class="plate-region">${p.region}</div>
-                        <div class="plate-number">${p.number}</div>
+                        <div class="plate-region">
+                            <c:out value="${p.region}" />
+                        </div>
+                        <div class="plate-number">
+                            <c:out value="${p.number}" />
+                        </div>
                     </div>
 
                     <!-- Status & Info -->
@@ -234,7 +242,8 @@
                                 </c:when>
                                 <c:otherwise>
                                         <span class="status-published">
-                                            <i class="bi bi-question-circle me-1"></i>${p.status}
+                                            <i class="bi bi-question-circle me-1"></i>
+                                            <c:out value="${p.status}" />
                                         </span>
                                 </c:otherwise>
                             </c:choose>
@@ -242,10 +251,10 @@
                         <div class="text-end">
                             <div class="price-tag">
                                 <c:choose>
-                                    <c:when test="${p.number.contains('777')}">
+                                    <c:when test="${fn:contains(p.number, '777')}">
                                         500 000 ₽
                                     </c:when>
-                                    <c:when test="${p.number.contains('123') || p.number.contains('456')}">
+                                    <c:when test="${fn:contains(p.number, '123') || fn:contains(p.number, '456')}">
                                         250 000 ₽
                                     </c:when>
                                     <c:otherwise>
@@ -255,10 +264,10 @@
                             </div>
                             <div class="plate-rarity">
                                 <c:choose>
-                                    <c:when test="${p.number.contains('777')}">
+                                    <c:when test="${fn:contains(p.number, '777')}">
                                         <i class="bi bi-gem me-1"></i>Эксклюзив
                                     </c:when>
-                                    <c:when test="${p.number.contains('123') || p.number.contains('456')}">
+                                    <c:when test="${fn:contains(p.number, '123') || fn:contains(p.number, '456')}">
                                         <i class="bi bi-star me-1"></i>Премиум
                                     </c:when>
                                     <c:otherwise>

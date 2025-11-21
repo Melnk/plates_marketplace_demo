@@ -11,6 +11,10 @@
     <button type="submit">Удалить</button>
 </form>
 
+<form action="/requests/new/${plate.id}" method="get">
+    <button>Подать заявку на продажу</button>
+</form>
+
 <a href="/plates">Назад</a>
 
 </body>
