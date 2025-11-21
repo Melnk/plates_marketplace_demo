@@ -1,4 +1,4 @@
-package com.example.plates;
+package com.plates;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

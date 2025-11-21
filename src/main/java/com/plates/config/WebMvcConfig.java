@@ -1,4 +1,4 @@
-package com.example.plates.config;
+package com.plates.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.example.plates")
+@ComponentScan(basePackages = "com.plates")
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
