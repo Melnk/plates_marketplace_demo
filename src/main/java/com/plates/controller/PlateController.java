@@ -2,6 +2,7 @@ package com.plates.controller;
 
 import com.plates.entity.Plate;
 import com.plates.repository.PlateRepository;
+import com.plates.service.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,13 @@ import java.util.List;
 @RequestMapping("/plates")
 public class PlateController {
 
-    @Autowired
+    private final KafkaProducerService kafkaProducerService;
     private PlateRepository plateRepository;
+
+    public PlateController(KafkaProducerService kafkaProducerService, PlateRepository plateRepository) {
+        this.kafkaProducerService = kafkaProducerService;
+        this.plateRepository = plateRepository;
+    }
 
     @GetMapping
     public String listPlates(Model model) {
@@ -45,6 +51,7 @@ public class PlateController {
     @PostMapping("/add")
     public String addPlate(@ModelAttribute Plate plate) {
         plateRepository.save(plate);
+        kafkaProducerService.sendPlateCreated(plate);
         return "redirect:/plates";
     }
 
