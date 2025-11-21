@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "plates")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Plate {
@@ -22,4 +23,10 @@ public class Plate {
 
     @Column(nullable = false)
     private String status;
+
+    public Plate(String number, String region, String status) {
+        this.number = number;
+        this.region = region;
+        this.status = status;
+    }
 }

@@ -1,28 +1,14 @@
 package com.plates.repository;
 
 import com.plates.entity.Plate;
-import org.hibernate.SessionFactory;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
-public class PlateRepository {
+public interface PlateRepository extends JpaRepository<Plate, Long> {
+    // findAll(), save(), findById(), deleteById()
 
-    private final SessionFactory sessionFactory;
-
-    public PlateRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public List<Plate> findAll() {
-        return sessionFactory.getCurrentSession()
-            .createQuery("from Plate", Plate.class)
-            .list();
-    }
-
-    public void save(Plate plate) {
-        sessionFactory.getCurrentSession().save(plate);
-    }
+    Plate findByNumber(String number);
+    List<Plate> findByRegion(String region);
 }
