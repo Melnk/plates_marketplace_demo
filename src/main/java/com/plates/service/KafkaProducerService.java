@@ -24,4 +24,15 @@ public class KafkaProducerService {
             throw new RuntimeException("Failed to send plate to Kafka: " + plate.getNumber(), e);
         }
     }
+
+    public void send(String topic, Object value) {
+        try {
+            String json = mapper.writeValueAsString(value);
+            kafkaTemplate.send(topic, json);
+            System.out.println("➡️ Kafka send [" + topic + "] " + json);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

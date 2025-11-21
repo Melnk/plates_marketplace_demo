@@ -15,6 +15,13 @@
     <button>Подать заявку на продажу</button>
 </form>
 
+<c:if test="${plate.status == 'PUBLISHED'}">
+    <form action="/purchase/new/${plate.id}" method="get">
+        <button>Купить</button>
+    </form>
+</c:if>
+
+
 <a href="/plates">Назад</a>
 
 </body>
