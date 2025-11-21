@@ -21,7 +21,7 @@ public class DataConfig {
         ds.setDriverClassName("org.postgresql.Driver");
         ds.setUrl("jdbc:postgresql://localhost:5432/plates_marketplace");
         ds.setUsername("postgres");
-        ds.setPassword("postgres");
+        ds.setPassword("qwerty");
         return ds;
     }
 
