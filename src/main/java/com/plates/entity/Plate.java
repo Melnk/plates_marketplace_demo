@@ -22,7 +22,7 @@ public class Plate {
     private String region;
 
     @Column(nullable = false)
-    private String status;
+    private String status; // NEW, PENDING, PUBLISHED, SOLD, ARCHIVED
 
     public Plate(String number, String region, String status) {
         this.number = number;
